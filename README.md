@@ -1,4 +1,3 @@
-```markdown
 # NameGen
 
 **A lightweight command-line utility for generating consistent and flexible name-based identifiers from raw input files.**
@@ -150,4 +149,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Created by
 
 **NameGen** was created and maintained by [Your Name]. Contributions and feedback are welcome!
-```
