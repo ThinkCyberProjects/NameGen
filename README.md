@@ -28,7 +28,7 @@ NameGen helps red teams quickly generate likely usernames from harvested or publ
 
 ## Installation
 
-### One-liner install (Unix/Linux/macOS)
+### One-liner install (Unix/Linux)
 ```
 
 curl -o NameGen.sh https://raw.githubusercontent.com/ThinkCyberProjects/NameGen/refs/heads/main/NameGen.sh && chmod +x NameGen.sh
