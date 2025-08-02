@@ -10,6 +10,8 @@ if [ ! -f "$1" ]; then
     exit
 fi
 
+tmpfile=$(mktemp)
+
 while IFS= read -r line; do
     clean_line=$(echo "$line" | tr -cd '[:alpha:][:space:]')
 
@@ -32,16 +34,21 @@ while IFS= read -r line; do
         lname=$(printf "%s" "${tokens[@]}")
     fi
 
-    echo "${fname}${lname}"
-    echo "${lname}${fname}"
-    echo "${fname}.${lname}"
-    echo "${lname}.${fname}"
-    echo "${lname}${fname:0:1}"
-    echo "${fname:0:1}${lname}"
-    echo "${lname:0:1}${fname}"
-    echo "${fname:0:1}.${lname}"
-    echo "${lname:0:1}.${fname}"
-    echo "${fname}"
-    echo "${lname}"
+    {
+        echo "${fname}${lname}"
+        echo "${lname}${fname}"
+        echo "${fname}.${lname}"
+        echo "${lname}.${fname}"
+        echo "${lname}${fname:0:1}"
+        echo "${fname:0:1}${lname}"
+        echo "${lname:0:1}${fname}"
+        echo "${fname:0:1}.${lname}"
+        echo "${lname:0:1}.${fname}"
+        echo "${fname}"
+        echo "${lname}"
+    } >> "$tmpfile"
 
 done < "$1"
+
+sort "$tmpfile" | uniq
+rm "$tmpfile"
