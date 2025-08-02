@@ -1,34 +1,37 @@
+
 # NameGen
 
-**A lightweight command-line utility for generating consistent and flexible name-based identifiers from raw input files.**
+**A command-line tool for generating realistic domain usernames from names — built for red team operators and offensive security use.**
 
-NameGen is a shell-based tool that processes lists of names from a plain text file and outputs a comprehensive set of permutations. It helps automate the creation of usernames, aliases, or other unique identifiers from human names by standardizing formatting, removing unwanted characters, and offering structured variations. Whether you're managing account provisioning, obfuscating identity strings, or preparing user data for testing environments, NameGen streamlines name normalization and formatting through a fast, dependable CLI interface.
+NameGen helps red teams quickly generate likely usernames from harvested or publicly available name lists, emulating the formats commonly used in enterprise environments. It produces a comprehensive set of permutations — like jdoe, john.smith, smithj, and more — to support username enumeration, password spraying, and initial account discovery. With zero dependencies and clean output, NameGen integrates seamlessly into offensive workflows and scripts where speed, stealth, and realism matter.
 
 ## Key Features
 
-- Cleans and sanitizes name data (removes non-alphabetic characters)
-- Converts names to lowercase for consistency
+- Cleans and sanitizes raw name data (removes non-alphabetic characters)
+- Normalizes names to lowercase for consistent output
 - Supports single-word, two-word, and multi-word name entries
-- Generates multiple permutations (e.g., `johnsmith`, `smithj`, `j.smith`)
-- Easy integration into shell pipelines and automation scripts
-- No external dependencies — fully POSIX-compatible
-- Handles invalid or malformed lines gracefully
+- Generates common enterprise-style username patterns (`jdoe`, `john.smith`, `smithj`, etc.)
+- Ideal for username enumeration and account discovery phases
+- Integrates easily into shell pipelines and automation workflows
+- No external dependencies
+- Silently skips malformed or empty lines to preserve clean output
 
 ## Supported Input Formats
 
-| Format Type     | Example Input          | Notes                                 |
-|------------------|------------------------|----------------------------------------|
-| Plain Text (.txt) | `John Smith`           | One full name per line                |
-| Lowercase/Uppercase | `JANE DOE`, `alice`  | All variants automatically normalized |
-| Multi-word Names | `Mary Anne Doe`        | Middle names are collapsed into last  |
-| Noisy Input      | `***Bob123@! Smith***` | Non-letter characters are removed     |
+| Format Type         | Example Input           | Description                                                   |
+|---------------------|-------------------------|---------------------------------------------------------------|
+| Plain Text (.txt)   | `John Smith`            | One full name per line                                        |
+| Case-insensitive    | `alice`, `JANE DOE`     | All input is converted to lowercase automatically             |
+| Multi-part Names    | `Mary Anne Doe`         | Everything after the first token is merged into the last name |
+| Noisy/Corrupted     | `***Bob123@! Smith***`  | Non-letter characters are stripped before processing          |
+
 
 ## Installation
 
 ### One-liner install (Unix/Linux/macOS)
 ```
 
-curl -o namegen.sh [https://raw.githubusercontent.com/yourusername/namegen/main/namegen.sh](https://raw.githubusercontent.com/yourusername/namegen/main/namegen.sh) && chmod +x namegen.sh
+curl -o namegen.sh https://raw.githubusercontent.com/ThinkCyberProjects/NameGen/refs/heads/main/NameGen.sh && chmod +x namegen.sh
 
 ```
 
@@ -37,25 +40,25 @@ curl -o namegen.sh [https://raw.githubusercontent.com/yourusername/namegen/main/
 1. Clone or download the repository:
 ```
 
-git clone [https://github.com/yourusername/namegen.git](https://github.com/yourusername/namegen.git)
+git clone https://github.com/ThinkCyberProjects/NameGen.git
 
 ```
 2. Navigate into the directory:
 ```
 
-cd namegen
+cd NameGen
 
 ```
 3. Make the script executable:
 ```
 
-chmod +x namegen.sh
+chmod +x NameGen.sh
 
 ```
 4. Optionally move it to a directory in your `$PATH`:
 ```
 
-mv namegen.sh /usr/local/bin/namegen
+mv NameGen.sh /usr/local/bin/NameGen
 
 ```
 
@@ -63,17 +66,17 @@ mv namegen.sh /usr/local/bin/namegen
 
 ```
 
-./namegen.sh names.txt
+./NameGen.sh usernames.txt
 
 ```
 
-- **names.txt**: A plain text file where each line contains a single name entry.
+- **usernames.txt**: A plain text file where each line contains a single name entry.
 - Output is printed to standard output (can be redirected or piped).
 - Each line generates a set of name permutations.
 
 ## Examples
 
-### Example input file (`names.txt`)
+### Example input file (`usernames.txt`)
 ```
 
 John Smith
@@ -85,7 +88,7 @@ Mary Anne Doe
 ### Command
 ```
 
-./namegen.sh names.txt
+./namegen.sh usernames.txt
 
 ```
 
@@ -128,24 +131,10 @@ doe
 
 ```
 
-> Tip: You can redirect output to a file using `./namegen.sh names.txt > usernames.out`
+> Tip: You can redirect output to a file using `./NameGen.sh usernames.txt > usernames.out`
 
 ## Additional Tips
 
 - Make sure the input file uses UTF-8 encoding and Unix line endings (`\n`).
 - Names with middle names will treat all names after the first as the "last name" (e.g., `Mary Anne Doe` → `fname=mary`, `lname=annedoe`).
-- Use in automation:
-```
 
-cat names.txt | ./namegen.sh | sort | uniq > final\_usernames.txt
-
-```
-- To ignore duplicate entries or filter for specific patterns, combine with `grep`, `awk`, or `sed`.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Created by
-
-**NameGen** was created and maintained by [Your Name]. Contributions and feedback are welcome!
