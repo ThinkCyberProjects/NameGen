@@ -23,7 +23,7 @@ NameGen helps red teams quickly generate likely usernames from harvested or publ
 | Plain Text (.txt)   | `John Smith`            | One full name per line                                        |
 | Case-insensitive    | `alice`, `JANE DOE`     | All input is converted to lowercase automatically             |
 | Multi-part Names    | `Mary Anne Doe`         | Everything after the first token is merged into the last name |
-| Noisy/Corrupted     | `***Bob123@! Smith***`  | Non-letter characters are stripped before processing          |
+
 
 
 ## Installation
@@ -31,7 +31,7 @@ NameGen helps red teams quickly generate likely usernames from harvested or publ
 ### One-liner install (Unix/Linux/macOS)
 ```
 
-curl -o namegen.sh https://raw.githubusercontent.com/ThinkCyberProjects/NameGen/refs/heads/main/NameGen.sh && chmod +x namegen.sh
+curl -o NameGen.sh https://raw.githubusercontent.com/ThinkCyberProjects/NameGen/refs/heads/main/NameGen.sh && chmod +x namegen.sh
 
 ```
 
@@ -130,8 +130,6 @@ maryanne
 doe
 
 ```
-
-> Tip: You can redirect output to a file using `./NameGen.sh usernames.txt > usernames.out`
 
 ## Additional Tips
 
